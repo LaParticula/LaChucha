@@ -1,7 +1,23 @@
-/*var boton1 = document.getElementById("1");
+var valorB1;
 
-boton1.addEventListener("click", botonRead);
+var boton1 = document.getElementsByName("botones");
 
-function botonRead() => {} 
+//boton1.E.addEventListener("click", botonRead);
+
+//var xd = setInterval(botonRead, 100);
+
+//var botonRead = () => {console.log("xd");}}
+
+/*function botonRead(valor)
+{
+    valorB1 = valor.target.value;
+    console.log("funciona");
+}
 */
-console.log("xd");
+
+boton1.forEach(function(boton){
+    boton.addEventListener("click", function(){
+        valorB1 = boton.value;
+        console.log(valorB1);
+    })
+})
