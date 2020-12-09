@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ .header{
+    width: 100%;
+    display: block;
+    right: 0;
+    left: 0;
+ }
+
+
+.header__div{
+    background-color: rgb(252, 232, 201);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.header__div-icon a {
+    font-family: 'Nerko One', cursive;
+    font-size: 25px;
+    margin: 10px;
+    margin-left: 40px;
+    padding: 5px 6px;
+    background-color: palevioletred;
+    border-radius: 5px;
+    color: papayawhip;
+    cursor: pointer;
+    cursor: hand;
+    text-decoration: none;
+}
+
+.header__div-nav-ul{
+    float: right;
+    display: inline-flex;
+    margin: 10px;
+}
+.header__div-nav-ul-li{
+    list-style-type: none;
+    background-color: rgb(252, 245, 234);
+    margin: 8px;
+    padding: 6px 4px;
+    border-bottom: solid palevioletred 4px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+.header__div-nav-ul-li:hover{
+    background-color: palevioletred;
+    transition: 0.4s;
+    
+
+}
+.header__div-nav-ul-li:hover > a{
+    color: white;
+
+}
+.header__div-nav-ul-li a{
+    font-family: 'Nerko One', cursive;
+    color: rebeccapurple;
+    letter-spacing: 1px;
+    text-decoration: none;
+    margin: 10px;
+   
+}
+
+.menu{
+    padding: 4px;
+    background-color: lightcoral;
+    display: flex; 
+    justify-content: space-between;  
+    height: 40px;
+    width: 40px;
+    align-items: center;
+    border-bottom: solid palevioletred 4px;
+    border-right: solid palevioletred 4px;
+    overflow: hidden;
+
+}
+.menu:hover{
+    width: 100vw;
+    transition: .1s;
+}
+.menu:hover > ul{
+    visibility: visible;
+    transition: 4s;
+}
+.menu:hover > img{
+    margin-left: 40px;
+    transition: .4s;
+}
+.menu img{
+    width: 40px;
+}
+.menu ul{
+    visibility: hidden;
+    list-style-type: none;
+    display: inline-flex;
+    margin: 4px;
+    position: absolute;
+    right: 0;
+    
+}
+.menu ul li{
+    margin: 3px 12px;
+    align-items: center;
+    margin-bottom: 3px;
+    
+
+}
+
+.menu ul li a{
+    text-decoration: none;
+    font-size: 20px;
+    color: lightcyan;
+    font-family: 'Nerko One', cursive;
+    padding: 2px 6px;
+    border-radius: 5px;
+    background-color: lightpink;
+}
+
+.menu ul li a:hover{
+    background: papayawhip;
+    color: rebeccapurple;
+    transition: 0.3s;
+}
