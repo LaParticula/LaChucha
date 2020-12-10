@@ -4,6 +4,7 @@
 }
 body{
     background: #333;
+    
 }
 
 div{
@@ -12,7 +13,7 @@ div{
     max-width: max-content;
     min-width: max-content;
     height: auto;
-    margin: 10px auto;
+    margin:  5px auto;
     justify-content: space-between;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -67,12 +68,13 @@ div .area2 {
 
 div .area2 .botones2{
     font-size: 50px;
-    margin: 10px 5px;
+    margin: 5px 5px;
     padding: 1px;
     display: block;
     width: 70px;
     height: 70px ;
     margin-left: 0%;
+    margin-right: 0%;
     border-radius: 10px;
     border: solid orange 2px;
     background: wheat;
@@ -90,9 +92,11 @@ div .area2 .botones2:hover{
 .panel{
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 20px 10px;
     max-width: 100%;
     background: gray;
+    
+
 }
 
 .panel input{
