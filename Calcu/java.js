@@ -1,3 +1,4 @@
+/*function botonRead(valor)
 var valorB1;
 
 var boton1 = document.getElementsByName("botones");
@@ -8,12 +9,10 @@ var boton1 = document.getElementsByName("botones");
 
 //var botonRead = () => {console.log("xd");}}
 
-/*function botonRead(valor)
 {
     valorB1 = valor.target.value;
     console.log("funciona");
 }
-*/
 
 boton1.forEach(function(boton){
     boton.addEventListener("click", function(){
@@ -21,3 +20,4 @@ boton1.forEach(function(boton){
         console.log(valorB1);
     })
 })
+*/
