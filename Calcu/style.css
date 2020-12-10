@@ -105,3 +105,8 @@ div .area2 .botones2:hover{
     border-radius: 10px;
 
 }
+
+#display_html{
+    padding-right: 3%;
+    text-align: right;
+}
