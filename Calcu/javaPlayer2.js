@@ -21,7 +21,7 @@ numbers.forEach(function(value){
         valorNum = value.innerText;
         operation();
     })
-})
+});
 
 logicOps.forEach(function(value){
     value.addEventListener("click", function(){
@@ -29,26 +29,34 @@ logicOps.forEach(function(value){
         operator = " " + operator + " ";
         operation2();
     })
-})
+});
 
-buttons.forEach(function(value){
-    value.addEventListener("click", function(){
-        if (value.innerText == "E"){
+buttons.forEach(function(value)
+{
+    value.addEventListener("click", function()
+    {
+        if (value.innerText == "E")
+        {
             result();
-        }else{
-            display1.value = "Ready";
-            valorDisplay = "";
-            numText = "";
-            numReal = 0;
-            resultado = "";
-            valorActual = "";
-            cuentaActual = "";
-            resultado = "";
-            opMulti = false;
-            operacion = "";
+        }
+        else
+        {
+            chao();
         }
     })
-})
+});
+
+function chao(){
+    display1.value = "Ready";
+    valorDisplay = "";
+    numText = "";
+    numReal = 0;
+    resultado = "";
+    valorActual = "";
+    cuentaActual = "";
+    resultado = "";
+    opMulti = false;
+}
 
 function operation(){
     numText += valorNum;
@@ -70,6 +78,8 @@ function result(){
             operacion += dato;
         }
     }
+    chao();
+    valorDisplay = operacion;
     display1.value = eval(operacion);
 
     /*for (letra of valorDisplay){

@@ -120,24 +120,29 @@ for (let i=0; i<20; i++){
     vacasPNG = document.getElementsByName("vacas_html");
 }
 
+var f = 0;
+
 function fps(){
-    
-    for (let f=0;f < vacasPNG.length; f++){
-        setTimeout(1000);
+
+    if (f < vacasPNG.length){
         console.log(f);
-        if(f == vacasPNG.length){
+        f++;
+
+        if (f >= vacasPNG.length){
             f = 0;
         }
+
         papel.clearRect(0, 0, 500, 500); 
-        for (let i=0;i < posX.length; i++){
-            if(i == posX.length){
+
+        for (let i=0; i < posX.length; i++){
+            if (i >= posX.length){
                 i = 0;
             }
             papel.drawImage(vacasPNG[f], posX[i] , posY[i] );
         }
     }
 
-    setInterval(fps, 500);
+    setInterval(fps, 1000);
 }
 
 fps();
