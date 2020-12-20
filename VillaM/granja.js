@@ -8,6 +8,8 @@
 87 = W
 68 = D
 83 = S
+
+82 = R
 */
 
 var getKeydown = (key) => {
@@ -33,7 +35,8 @@ var getKeydown = (key) => {
         dUp = false;
         up = false;
     }
-    console.log(key.keyCode)
+    resetPigPosition(key);
+    //console.log(key.keyCode)
 };
 
 var getKeyup = (key) => {
@@ -84,9 +87,11 @@ document.addEventListener("keyup", getKeyup);
 var canvas = document.getElementById("villa");
 var ctx = canvas.getContext("2d");
 
-var speed = 10; //pixeles
-var backgroundSize = 1.4; // multiplicación
+var speed = 10; // pixeles/tick
+var backgroundSize = 1.5; // multiplicación
 var imgSize = 1; // multiplicación
+var pigSize = 1; // multiplicación
+var numberOfPigs = 110; //192
 
 var canWidth = canvas.width = 900 * backgroundSize;
 var canHeight = canvas.height = 675 * backgroundSize;
@@ -96,6 +101,94 @@ var imgPosX = 0;
 var imgPosY = 0;
 var imgWidth = 200;
 var imgHeight = 167;
+var imgCanPigX = [];
+var imgCanPigY = [];
+
+
+
+function resetPigPosition(key) {
+    if (key.keyCode == 82) {
+        imgCanPigX = [];
+        imgCanPigY = [];
+        currentPig = 0;
+        pigRandomPosition();
+        trys.push(tryTotal);
+        promTrys();
+        tryTotal = 0;
+    }
+}
+
+function promTrys() {
+    if (trys.length == 20) {
+        for (t of trys) {
+            trysSum += t;
+        }
+        trysPromedio = Math.floor(trysSum / trys.length);
+        console.log("promedio de intentos: " + trysPromedio);
+        trysSum = 0;
+        trys = [];
+    }
+}
+
+var trysSum = 0;
+var trysPromedio = 0; 
+var trys = [];
+var tryTotal = 0;
+
+var retry = 0;
+var retryNum = 300;
+
+var currentPig = 0;
+
+pigRandomPosition();
+
+function pigRandomPosition() {
+    for (; currentPig<numberOfPigs; currentPig++) {
+        var pigS = 80 * pigSize;
+        var pigX = imgCanPigX;
+        var pigY = imgCanPigY;
+        var x;
+        var y;
+        var retry;
+        x = randomNumGen(0, canWidth - 80 * pigSize);
+        y = randomNumGen(0, canHeight - 80 * pigSize);
+
+        for (let i=0; i<pigX.length; i++) {
+            while ( 
+                ((x >= pigX[i] && x <= pigX[i] + pigS) && (y >= pigY[i] && y <= pigY[i] + pigS)) ||
+                ((x + pigS >= pigX[i] && x + pigS <= pigX[i] + pigS) && (y >= pigY[i] && y <= pigY[i] + pigS)) ||
+                ((x + pigS >= pigX[i] && x + pigS <= pigX[i] + pigS) && (y + pigS >= pigY[i] && y + pigS <= pigY[i] + pigS)) ||
+                ((x >= pigX[i] && x <= pigX[i] + pigS) && (y + pigS >= pigY[i] && y + pigS <= pigY[i] + pigS)) 
+            ) {
+                x = randomNumGen(0, canWidth - pigS);
+                y = randomNumGen(0, canHeight - pigS);
+                i = 0;
+                retry++;
+                tryTotal++;
+                //console.log("retry");
+                if (retry >= retryNum) {
+                    imgCanPigX = [];
+                    imgCanPigY = [];
+                    currentPig = -1;
+                    break
+                }
+            }
+            if (retry >= retryNum) {
+                retry = 0;
+                x = -1;
+                y = -1;
+                break
+            }
+        }
+        retry = 0;
+        if (x != -1 && y != -1) {
+            imgCanPigX.push(x);
+            imgCanPigY.push(y);
+            //console.log("add:", x, y);
+        }
+    }
+}
+
 
 var cowImage = new Image();
 cowImage.src = "vacaRePiolaBailandoLR.png";
@@ -113,8 +206,17 @@ background.onload = () => {
     allLoad();
 }
 
+var pigImage = new Image();
+pigImage.src = "pigOfDeath.png";
+var pigImageLoad = false;
+pigImage.onload = () => {
+    pigImageLoad = true;
+    allLoad();
+}
+
 function allLoad() {
-    if (backgroundLoad && cowImageLoad) {
+    if (backgroundLoad && cowImageLoad && pigImageLoad) {
+        setInterval(fps, 33.333);
         setInterval(drawCow, 100);
     }
 }
@@ -146,6 +248,19 @@ function fps() {
         imgWidth * imgSize,
         imgHeight * imgSize
     );
+    for (let i=0; i<imgCanPigX.length; i++) {
+        ctx.drawImage(
+            pigImage,
+            0,
+            0,
+            80,
+            80,
+            imgCanPigX[i],
+            imgCanPigY[i],
+            80 * pigSize,
+            80 * pigSize,
+        );
+    }
     move();
     collesion();
 }
@@ -204,4 +319,14 @@ function drawCow() {
     imgPosX = currentImage * imgWidth;
 }
 
-setInterval(fps, 33.333);
+function drawPigs() {
+
+}
+
+function randomNumGen(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+var x = randomNumGen(0 , 6);
+
+
